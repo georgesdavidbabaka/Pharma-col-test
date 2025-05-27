@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=375, initial-scale=1" />
+  <title>Stock Médicaments</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+      color: #111;
+    }
+    .container {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 80px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 18px 0 8px;
+      position: relative;
+    }
+    .header .back-arrow {
+      font-size: 1.65em;
+      color: #222;
+      cursor: pointer;
+      margin-right: 10px;
+      background: none;
+      border: none;
+    }
+    .header-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 8px;
+    }
+    .header-title {
+      background: #f5f9fa;
+      color: #1976d2;
+      border-radius: 18px;
+      font-weight: 600;
+      font-size: 1.08em;
+      padding: 4px 20px 4px 20px;
+      display: flex;
+      align-items: center;
+      border: none;
+      outline: none;
+      margin-right: 2px;
+    }
+    .header-title.selected {
+      background: #1976d2;
+      color: #fff;
+    }
+    .header-title .stock-emoji {
+      margin-left: 7px;
+      font-size: 1.1em;
+    }
+    .header-menu {
+      font-size: 1.6em;
+      color: #222;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    .med-list {
+      margin: 12px 0 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .med-item {
+      display: flex;
+      align-items: center;
+      padding: 0 0 8px 0;
+      margin: 0 0 6px 0;
+      border-bottom: 1px solid #f1f1f1;
+      position: relative;
+      min-height: 74px;
+    }
+    .med-checkbox {
+      margin-left: 12px;
+      margin-right: 8px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    .med-img {
+      width: 58px;
+      height: 58px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-right: 12px;
+      background: #f7f7f7;
+      border: 1px solid #eee;
+      flex-shrink: 0;
+    }
+    .med-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-top: 2px;
+    }
+    .med-name {
+      font-size: 1.08em;
+      font-weight: 700;
+      margin-bottom: 2px;
+      margin-top: 2px;
+      color: #111;
+      line-height: 1.2;
+    }
+    .med-date {
+      font-size: 0.93em;
+      color: #888;
+      margin-bottom: 2px;
+      margin-top: 1px;
+    }
+    .med-price {
+      font-size: 1.05em;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 2px;
+    }
+    .med-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 8px;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+    .med-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      font-size: 1.45em;
+      color: #fff;
+      background: #e53935;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-left: 0;
+      margin-right: 0;
+      transition: background 0.18s;
+      position: relative;
+    }
+    .med-btn.ok {
+      background: #218c4a;
+      margin-left: 0;
+    }
+    .med-btn:active { filter: brightness(0.85);}
+    .rupture {
+      background: #e53935;
+      color: #fff;
+      font-size: 0.95em;
+      font-weight: 600;
+      border-radius: 18px;
+      padding: 6px 16px;
+      margin-right: 7px;
+      margin-bottom: 0;
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      user-select: none;
+    }
+    .rupture + .med-btn {
+      margin-left: -12px;
+    }
+    .btns-bottom {
+      display: flex;
+      flex-direction: column;
+      margin: 22px 10px 0 10px;
+      position: fixed;
+      bottom: 62px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100vw - 18px);
+      max-width: 410px;
+      gap: 12px;
+      z-index: 100;
+    }
+    .btns-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .btn-bottom {
+      flex: 1;
+      border: none;
+      border-radius: 22px;
+      font-size: 1.08em;
+      font-weight: 700;
+      padding: 14px 0;
+      cursor: pointer;
+      transition: background 0.18s;
+      margin-bottom: 0;
+    }
+    .btn-remove {
+      background: #e53935;
+      color: #fff;
+    }
+    .btn-add {
+      background: #218c4a;
+      color: #fff;
+    }
+    .btn-delete-selected {
+      display: none;
+      background: #d32f2f;
+      color: #fff;
+      border: none;
+      border-radius: 22px;
+      font-weight: 700;
+      font-size: 1.08em;
+      padding: 14px 0;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn-remove:active, .btn-add:active, .btn-delete-selected:active { filter: brightness(0.9);}
+    /* Barre du bas */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      max-width: 430px;
+      background: #fff;
+      box-shadow: 0 -2px 16px rgba(0,0,0,0.06);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 56px;
+      z-index: 1000;
+      user-select: none;
+    }
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 1.7em;
+      padding: 5px 0 0 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+      transition: color 0.18s;
+      position: relative;
+    }
+    .nav-btn.active {
+      color: #1976d2;
+    }
+    .nav-label {
+      display: block;
+      font-size: 0.55em;
+      margin-top: 2px;
+      letter-spacing: 0.01em;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    @media (max-width: 500px) {
+      .container, .bottom-nav {
+        max-width: 100vw;
+      }
+      .btns-bottom {
+        width: 98vw;
+        max-width: 98vw;
+      }
+      .btn-delete-selected {
+        max-width: 98vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="back-arrow" onclick="window.history.back()">&#8592;</button>
+      <div class="header-title-group">
+        <button class="header-title selected">stock <span class="stock-emoji">📦</span></button>
+      </div>
+      <button class="header-menu"><i class="fas fa-ellipsis-v"></i></button>
+    </div>
+
+    <!-- Liste des médicaments -->
+    <ul class="med-list" id="medList"></ul>
+
+    <!-- Boutons bas -->
+    <div class="btns-bottom">
+      <button class="btn-delete-selected" id="btnDeleteSelected">Supprimer la sélection</button>
+      <div class="btns-row">
+        <button class="btn-bottom btn-remove" id="btnRemove">Retirer un medicament</button>
+        <button class="btn-bottom btn-add" id="btnAdd">Ajouter un medicament</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barre de navigation du bas -->
+  <div class="bottom-nav">
+    <button class="nav-btn active" title="Accueil" id="btnHome">🏠<span class="nav-label">Home</span></button>
+    <button class="nav-btn" title="Stock">📦<span class="nav-label">Stock</span></button>
+    <button class="nav-btn" title="Commande">💬<span class="nav-label">Commande</span></button>
+    <button class="nav-btn" title="Profil">👤<span class="nav-label">Profil</span></button>
+  </div>
+
+  <script>
+    const meds = [
+      { name: "Magnésium Marin & Vitamine B6 - Formule naturelle", img: "images (7).jpeg.jpg", price: "30Dh", date: "Livre mercredi, 23 mai 2025", rupture: false },
+      { name: "Carbamide Forte Vitamine D3 K2 MK7, Vitamine végétale à base ...", img: "pack-duo-vitamine-d3k2-vegetale-huile.png", price: "60Dh", date: "Livre mercredi, 23 mai 2025", rupture: false },
+      { name: "Magnésium Marin & Vitamine B6 - Formule naturelle", img: "images (7).jpeg.jpg", price: "30Dh", date: "Livre mercredi, 23 mai 2025", rupture: true },
+      { name: "Carbamide Forte Vitamine D3 K2 MK7, Vitamine végétale...", img: "xvitamine-d3-k2-mk7.jpg.pagespeed.ic.Zb_ZCGdACi.jpg", price: "60Dh", date: "Livre mercredi, 23 mai 2025", rupture: false },
+      { name: "Carbamide Forte Vitamine D3 K2 MK7, Vitamine végétale ....", img: "pack-duo-vitamine-d3k2-vegetale-huile.png", price: "70Dh", date: "Livre mercredi, 23 mai 2025", rupture: false },
+      { name: "Imodium duo", img: "image.png.jpg", price: "28Dh", date: "Livre mercredi, 23 mai 2025", rupture: false },
+      { name: "oropolis adoucit la gorge", img: "inline-123326.jpg.jpg", price: "30Dh", date: "Livre mercredi, 23 mai 2025", rupture: false },
+      { name: "D-cure", img: "d-cure-25-000-ui-12-ampoules.jpg", price: "25Dh", date: "Livre mercredi, 23 mai 2025", rupture: false }
+    ];
+
+    let selectionMode = false;
+    let selectedMeds = new Set();
+
+    const btnRemove = document.getElementById('btnRemove');
+    const btnDeleteSelected = document.getElementById('btnDeleteSelected');
+    const container = document.getElementById('container');
+
+    function renderMeds() {
+      const ul = document.getElementById('medList');
+      ul.innerHTML = '';
+      meds.forEach((med, idx) => {
+        let actions = '';
+
+        if (med.rupture) {
+          actions = `<span class="rupture" title="Cliquez pour supprimer" onclick="removeMed(${idx})">Rupture</span>`;
+        } else {
+          actions = `
+            <button class="med-btn" title="Mettre en rupture" onclick="setRupture(${idx})">✖</button>
+            <button class="med-btn ok" title="En stock" onclick="setInStock(${idx})">✔</button>
+          `;
+        }
+
+        const checkbox = selectionMode ? `<input type="checkbox" class="med-checkbox" data-idx="${idx}" ${selectedMeds.has(idx) ? 'checked' : ''} onchange="toggleSelect(${idx}, this.checked)">` : '';
+
+        ul.innerHTML += `
+          <li class="med-item" data-idx="${idx}">
+            ${checkbox}
+            <img class="med-img" src="${med.img}" alt="${med.name}">
+            <div class="med-info">
+              <div class="med-name">${med.name}</div>
+              <div class="med-date">${med.date}</div>
+              <div class="med-price">${med.price}</div>
+            </div>
+            <div class="med-actions">
+              ${actions}
+            </div>
+          </li>
+        `;
+      });
+
+      btnDeleteSelected.style.display = selectionMode ? 'block' : 'none';
+    }
+
+    function toggleSelect(idx, checked) {
+      if (checked) {
+        selectedMeds.add(idx);
+      } else {
+        selectedMeds.delete(idx);
+      }
+    }
+
+    function setRupture(idx) {
+      meds[idx].rupture = true;
+      renderMeds();
+    }
+
+    function setInStock(idx) {
+      meds[idx].rupture = false;
+      renderMeds();
+    }
+
+    function removeMed(idx) {
+      meds.splice(idx, 1);
+      selectedMeds.delete(idx);
+      selectedMeds = new Set(Array.from(selectedMeds).map(i => i > idx ? i - 1 : i));
+      renderMeds();
+    }
+
+    function deleteSelected() {
+      if (selectedMeds.size === 0) {
+        alert("Aucun médicament sélectionné.");
+        return;
+      }
+      if (confirm(`Supprimer ${selectedMeds.size} médicament(s) ?`)) {
+        const toDelete = Array.from(selectedMeds).sort((a,b) => b - a);
+        toDelete.forEach(idx => meds.splice(idx, 1));
+        selectedMeds.clear();
+        selectionMode = false;
+        updateRemoveButtonText();
+        renderMeds();
+      }
+    }
+
+    function addMed() {
+      const name = prompt("Nom du médicament :");
+      if (!name) return alert("Nom requis !");
+      const price = prompt("Prix (ex: 50Dh) :") || "";
+      const date = prompt("Date de livraison (ex: Livre mercredi, 23 mai 2025) :") || "";
+      const img = prompt("URL de l'image (laisser vide pour défaut) :") || "https://via.placeholder.com/58";
+      meds.push({name, price, date, img, rupture: false});
+      renderMeds();
+    }
+
+    function updateRemoveButtonText() {
+      btnRemove.textContent = selectionMode ? "Supprimer la sélection" : "Retirer un medicament";
+    }
+
+    btnRemove.onclick = function(event) {
+      event.stopPropagation(); // Empêche la propagation pour éviter le clic extérieur immédiat
+      selectionMode = !selectionMode;
+      if (!selectionMode) {
+        selectedMeds.clear();
+      }
+      updateRemoveButtonText();
+      renderMeds();
+    };
+
+    document.getElementById('btnAdd').onclick = function() {
+      addMed();
+    };
+
+    btnDeleteSelected.onclick = function() {
+      deleteSelected();
+    };
+
+    // Redirection au clic sur Home
+    document.getElementById('btnHome').addEventListener('click', function() {
+      window.location.href = 'menupharmacieidex.html';
+    });
+
+    // Clic extérieur pour désactiver la sélection
+    document.addEventListener('click', function(event) {
+      if (selectionMode) {
+        // Vérifie si le clic est en dehors de la zone des boutons bas
+        const btnsBottom = document.querySelector('.btns-bottom');
+        if (!btnsBottom.contains(event.target)) {
+          selectionMode = false;
+          selectedMeds.clear();
+          updateRemoveButtonText();
+          renderMeds();
+        }
+      }
+    });
+
+    // Initialisation
+    updateRemoveButtonText();
+    renderMeds();
+  </script>
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/4c2b5b7f6c.js" crossorigin="anonymous"></script>
+</body>
+</html>

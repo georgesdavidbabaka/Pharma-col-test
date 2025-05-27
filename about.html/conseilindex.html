@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=375, initial-scale=1" />
+  <title>Conseil Mal de Tête</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #c7ded6;
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      background: #c7ded6;
+      padding-bottom: 16px;
+    }
+    .header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 18px 0 0 12px;
+      position: relative;
+    }
+    .back-arrow {
+      font-size: 1.7em;
+      color: #222;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+    .header-title {
+      margin-left: 12px;
+      font-size: 1.1em;
+      font-weight: 500;
+      color: #222;
+      background: #eaf2ef;
+      border-radius: 24px;
+      padding: 7px 30px 7px 38px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      min-width: 120px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .header-title img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: absolute;
+      left: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      border: 2px solid #c7ded6;
+    }
+    .chat-section {
+      width: 100%;
+      max-width: 430px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: 12px;
+      margin-bottom: 16px;
+      padding: 0 12px;
+    }
+    .user-question {
+      align-self: flex-end;
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 8px;
+      gap: 8px;
+    }
+    .user-question .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #222;
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+    }
+    .user-bubble {
+      background: #fff;
+      color: #111;
+      border-radius: 16px 16px 4px 16px;
+      padding: 12px 16px;
+      font-size: 1.08em;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      max-width: 80vw;
+      min-width: 120px;
+    }
+    .bot-response {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .bot-bubble {
+      background: #fff;
+      color: #111;
+      border-radius: 20px;
+      padding: 20px 18px 18px 18px;
+      font-size: 1.07em;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+      margin-bottom: 6px;
+      margin-top: 4px;
+      max-width: 100%;
+      line-height: 1.6;
+      border: 1.5px solid #eaf2ef;
+    }
+    .bot-bubble ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+    }
+    .bot-bubble li {
+      margin-bottom: 2px;
+    }
+    .bot-bubble .warn {
+      color: #e69a00;
+      font-size: 1em;
+      margin-right: 3px;
+    }
+    .bot-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+      border: 2px solid #c7ded6;
+      margin-right: 8px;
+    }
+    .bot-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #eaf2ef;
+      color: #1976d2;
+      border-radius: 24px;
+      font-size: 1em;
+      padding: 4px 18px 4px 34px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .bot-label img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      border: 2px solid #c7ded6;
+    }
+    .bot-followup {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 6px;
+      margin-bottom: 10px;
+      margin-top: 2px;
+      font-size: 1.06em;
+      color: #222;
+    }
+    .bot-followup img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+      border: 2px solid #c7ded6;
+    }
+    .input-section {
+      width: 100%;
+      max-width: 430px;
+      background: #fff;
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+      padding: 14px 10px 10px 10px;
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      z-index: 10;
+    }
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      margin-bottom: 6px;
+    }
+    .input-row input[type="text"] {
+      flex: 1;
+      border: none;
+      border-radius: 18px;
+      background: #eaf2ef;
+      padding: 12px 14px;
+      font-size: 1.07em;
+      color: #222;
+      outline: none;
+      font-family: inherit;
+      transition: background 0.18s;
+    }
+    .input-row input[type="text"]:focus {
+      background: #d3e7e0;
+    }
+    .input-row button {
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.35em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .input-row button:active {
+      background: #115293;
+    }
+    .input-suggestions {
+      display: flex;
+      gap: 10px;
+      margin-left: 2px;
+      margin-bottom: 4px;
+    }
+    .suggestion-btn {
+      background: #eaf2ef;
+      color: #1976d2;
+      border: none;
+      border-radius: 18px;
+      padding: 7px 18px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .suggestion-btn:active {
+      background: #d3e7e0;
+    }
+    @media (max-width: 500px) {
+      .container, .input-section, .chat-section {
+        max-width: 100vw;
+      }
+    }
+    @media (max-width: 430px) {
+      .input-section {
+        padding-left: 2vw;
+        padding-right: 2vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <span class="back-arrow" onclick="window.history.back()">&#8592;</span>
+      <div class="header-title">
+        <img src="https://img.icons8.com/color/48/doctor-male.png" alt="Avatar" />
+        conseils
+      </div>
+    </div>
+
+    <!-- Chat section -->
+    <div class="chat-section">
+      <!-- Question utilisateur -->
+      <div class="user-question">
+        <div class="user-bubble">
+          Quel medicament me conseil tu<br>
+          pour calmer le mal de tete
+        </div>
+        <div class="avatar">
+          <img src="https://img.icons8.com/ios-filled/50/user-male-circle.png" alt="User" style="width:32px;height:32px;border-radius:50%;background:#fff;">
+        </div>
+      </div>
+
+      <!-- Réponse bot -->
+      <div class="bot-response">
+        <div class="bot-label">
+          <img src="https://img.icons8.com/color/48/doctor-male.png" alt="Bot" />
+          conseils
+        </div>
+        <div class="bot-bubble">
+          Pour calmer un mal de tête, le médicament à choisir dépend de la cause (tension, migraine, déshydratation, etc.) et de ton état de santé général (allergies, autres traitements en cours, etc.).<br>
+          Voici des options courantes en automédication pour les maux de tête bénins à modérés :
+          <br><br>
+          <b>Médicaments antalgiques en vente libre</b>
+          <ol>
+            <li>
+              <b>Paracétamol</b> (Doliprane, Dafalgan, Efferalgan)
+              <ul>
+                <li>Bien toléré, peu d’effets secondaires</li>
+                <li> Dose habituelle : 500 mg à 1g toutes les 6 heures (max 3g/jour)</li>
+                <li><span class="warn">&#9888;</span> Attention au foie (en cas d’alcool, maladie hépatique)</li>
+              </ul>
+            </li>
+            <li>
+              <b>Ibuprofène</b> (Advil, Nurofen, Spedifen)
+              <ul>
+                <li>Anti-inflammatoire, utile si maux de tête liés à tension ou inflammation</li>
+                <li> Dose habituelle : 200-400 mg toutes les 6 à 8 h (max 1200 mg/jour en automédication)</li>
+                <li><span class="warn">&#9888;</span> Éviter si estomac sensible, antécédents d’ulcère, problèmes rénaux</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Relance bot -->
+      <div class="bot-followup">
+        <img src="https://img.icons8.com/color/48/doctor-male.png" alt="Bot" />
+        avez vous d'autres question ?
+      </div>
+    </div>
+
+    <!-- Barre d'entrée -->
+    <div class="input-section">
+      <div class="input-suggestions">
+        <button class="suggestion-btn">pharmacie</button>
+        <button class="suggestion-btn">pharma'col</button>
+      </div>
+      <div class="input-row">
+        <input type="text" placeholder="Poser une question" />
+        <button><span>&#128264;</span></button>
+        <button style="background:#1976d2;"><span>&#10148;</span></button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

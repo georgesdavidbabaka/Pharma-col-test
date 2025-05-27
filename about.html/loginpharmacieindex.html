@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion Pharmacie</title>
+  <style>
+    body {
+      background: #f6f8f7;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 410px;
+      margin: 32px auto;
+      background: #fff;
+      border-radius: 28px;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.08);
+      padding: 0 0 32px 0;
+      overflow: hidden;
+    }
+    .header-img {
+      width: 100%;
+      height: 185px;
+      object-fit: cover;
+      border-radius: 0 0 0 0;
+      display: block;
+    }
+    .title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 22px 0 6px 0;
+      text-transform: lowercase;
+    }
+    .subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 1.08rem;
+      margin-bottom: 18px;
+    }
+    .login-form {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .input-group {
+      display: flex;
+      align-items: center;
+      background: #eaf5f1;
+      border: 2px solid #b9e0d5;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      color: #333;
+      transition: border 0.2s;
+    }
+    .input-group:focus-within {
+      border-color: #17694a;
+    }
+    .input-group .icon {
+      margin-right: 12px;
+      font-size: 1.25rem;
+      color: #17694a;
+      min-width: 24px;
+      text-align: center;
+    }
+    .input-group input {
+      border: none;
+      background: transparent;
+      outline: none;
+      flex: 1;
+      font-size: 1rem;
+      color: #222;
+      padding: 6px 0;
+    }
+    .remember-me {
+      display: flex;
+      align-items: center;
+      margin: 0 0 8px 4px;
+      font-size: 1rem;
+      color: #444;
+    }
+    .remember-me input[type="checkbox"] {
+      margin-right: 8px;
+      accent-color: #17694a;
+    }
+    .btn-green {
+      width: 100%;
+      background: #17694a;
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      padding: 13px 0;
+      font-size: 1.13rem;
+      font-weight: 600;
+      margin: 12px 0 6px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .btn-green:hover {
+      background: #125d3e;
+    }
+    .btn-google {
+      width: 100%;
+      background: #181818;
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      padding: 13px 0;
+      font-size: 1.13rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+    .btn-google .g-icon {
+      background: #fff;
+      color: #181818;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 12px;
+      font-size: 1.2rem;
+    }
+    @media (max-width: 500px) {
+      .container {
+        max-width: 98vw;
+        padding: 0 0 18px 0;
+      }
+      .login-form {
+        width: 98%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="header-img" src="login pharmacie.jpg.jpg" alt="Pharmacien digital">
+    <div class="title">connectez votre pharmacie</div>
+    <div class="subtitle">Bienvenue, veuillez vous connecter pour continuer</div>
+    <form class="login-form" autocomplete="off">
+      <div class="input-group">
+        <span class="icon">&#128231;</span>
+        <input type="text" placeholder="adresse mail / Numéro de téléphone" required>
+      </div>
+      <div class="input-group">
+        <span class="icon">&#10010;</span>
+        <input type="text" placeholder="nom de la pharmacie" required>
+      </div>
+      <div class="input-group">
+        <span class="icon">&#128205;</span>
+        <input type="text" placeholder="adresse  / localisation" required>
+      </div>
+      <div class="input-group">
+        <span class="icon">&#128274;</span>
+        <input type="password" placeholder="Mot de passe" required>
+      </div>
+      <div class="remember-me">
+        <input type="checkbox" id="remember">
+        <label for="remember">Souviens-toi de moi</label>
+      </div>
+      <button type="submit" class="btn-green">Se connecter</button>
+      <button type="button" class="btn-google">
+        <span class="g-icon">G</span>
+        Continuer avec Google
+      </button>
+    </form>
+  </div>
+  <script>
+    document.querySelector('.login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      window.location.href = "menupharmacieindex.html";
+    });
+    document.querySelector('.btn-google').addEventListener('click', function() {
+      alert('Redirection vers Google...');
+    });
+  </script>
+</body>
+</html>

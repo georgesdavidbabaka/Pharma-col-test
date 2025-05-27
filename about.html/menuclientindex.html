@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=375, initial-scale=1" />
+  <title>Pharma'Col - Accueil complet</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" />
+  <script src="https://kit.fontawesome.com/4c2b5b7f6c.js" crossorigin="anonymous"></script>
+  <style>
+    html, body {
+      width: 100vw;
+      min-width: 100vw;
+      max-width: 100vw;
+      height: 100vh;
+      min-height: 100vh;
+      max-height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background: #fff;
+    }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background: #fff;
+    }
+    .container {
+      width: 375px;
+      min-width: 375px;
+      max-width: 375px;
+      margin: 0 auto;
+      flex: 1;
+      padding-bottom: 80px;
+      background: #fff;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 24px 16px 0 16px;
+      align-items: center;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .avatar {
+      width: 38px;
+      height: 38px;
+      background: #1976d2;
+      color: #fff;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 1.1em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    .address-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .address-label {
+      font-size: 0.95em;
+      color: #aaa;
+      margin-bottom: 2px;
+    }
+    .address-main {
+      font-weight: 700;
+      font-size: 1.08em;
+    }
+    .header-icons {
+      display: flex;
+      gap: 14px;
+    }
+    .header-icons i {
+      font-size: 1.3em;
+      color: #222;
+      cursor: pointer;
+      background: #f7f7f7;
+      border-radius: 7px;
+      padding: 7px 9px;
+      transition: background 0.2s ease;
+      user-select: none;
+    }
+    .header-icons i:hover {
+      background: #e3f0fa;
+    }
+    .search-bar {
+      margin: 18px 16px;
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 24px;
+      padding: 0 16px;
+      height: 46px;
+      box-shadow: 0 2px 10px rgba(25, 118, 210, 0.06);
+    }
+    .search-bar i {
+      color: #888;
+      font-size: 1.2em;
+      margin-right: 10px;
+      user-select: none;
+    }
+    .search-bar input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 1.1em;
+      flex: 1;
+      color: #222;
+    }
+    .filter-row {
+      display: flex;
+      gap: 12px;
+      margin: 20px 16px 0 16px;
+    }
+    .filter-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 0;
+      border-radius: 24px;
+      border: 1.5px solid #e0e0e0;
+      background: #fff;
+      color: #444;
+      font-weight: 600;
+      font-size: 1em;
+      cursor: pointer;
+      transition: border 0.15s, color 0.15s;
+      user-select: none;
+    }
+    .filter-btn.selected {
+      border-color: #1976d2;
+      color: #1976d2;
+      background: #e3f0fa;
+    }
+    .filter-btn i {
+      font-size: 1.25em;
+      color: inherit;
+      transition: color 0.15s;
+    }
+    .banner-section {
+      position: relative;
+      margin: 24px 16px 0 16px;
+    }
+    .banner-img {
+      width: 100%;
+      height: 140px;
+      border-radius: 18px;
+      object-fit: cover;
+      filter: brightness(0.98);
+      user-select: none;
+    }
+    .banner-btn {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: #1976d2;
+      color: #fff;
+      font-weight: 600;
+      padding: 7px 20px;
+      border-radius: 22px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    .banner-btn:hover {
+      background: #115293;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #bbb;
+      user-select: none;
+    }
+    .dot.active {
+      background: #1976d2;
+    }
+    .section-title {
+      margin: 28px 16px 14px 16px;
+      font-weight: 700;
+      font-size: 1.3em;
+      user-select: none;
+    }
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 24px;
+    }
+    .product-item {
+      display: flex;
+      gap: 20px;
+      padding: 0 16px 22px 16px;
+      align-items: flex-start;
+      position: relative;
+    }
+    .product-imgs {
+      display: flex;
+      margin-top: 6px;
+      min-width: 62px;
+    }
+    .product-imgs img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #f7f7f7;
+      border: 1px solid #eee;
+      user-select: none;
+    }
+    .product-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .product-name {
+      font-size: 1.13em;
+      font-weight: 700;
+      margin-bottom: 12px;
+      user-select: none;
+    }
+    .badges {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .badge {
+      background: #f8f8f8;
+      border: 1.5px solid #d2d2d2;
+      border-radius: 18px;
+      padding: 3px 18px;
+      font-size: 1em;
+      color: #888;
+      font-weight: 500;
+      min-width: 75px;
+      text-align: center;
+      user-select: none;
+    }
+    .product-date {
+      font-size: 0.97em;
+      color: #aaa;
+      margin-bottom: 10px;
+      user-select: none;
+    }
+    .prices-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: -8px;
+      margin-right: 6px;
+      user-select: none;
+    }
+    .price-current {
+      font-weight: 700;
+      font-size: 1.13em;
+      color: #111;
+    }
+    .price-off {
+      color: #2196f3;
+      font-size: 1em;
+      font-weight: 600;
+      margin-left: 2px;
+    }
+    .price-old {
+      color: #bbb;
+      font-size: 1em;
+      margin-left: 2px;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 375px;
+      min-width: 375px;
+      max-width: 375px;
+      background: #fff;
+      box-shadow: 0 -2px 16px rgba(0,0,0,0.06);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 58px;
+      z-index: 1000;
+      user-select: none;
+    }
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 1.7em;
+      padding: 5px 0 0 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+      transition: color 0.18s;
+      position: relative;
+    }
+    .nav-btn.active {
+      color: #1976d2;
+    }
+    .nav-label {
+      display: block;
+      font-size: 0.55em;
+      margin-top: 2px;
+      letter-spacing: 0.01em;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 0 2vw 80px 2vw;
+      }
+      .product-imgs img {
+        width: 54px;
+        height: 54px;
+      }
+      .badge {
+        padding: 3px 10px;
+        min-width: 60px;
+        font-size: 0.98em;
+      }
+      .bottom-nav {
+        width: 100vw;
+        min-width: 100vw;
+        max-width: 100vw;
+        left: 0;
+        transform: none;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header-row">
+      <div class="header-left">
+        <div class="avatar">PC</div>
+        <div class="address-block">
+          <div class="address-label">Adresse de livraison</div>
+          <div class="address-main">12 Av Prince Moulay Abdellah, Rabat</div>
+        </div>
+      </div>
+      <div class="header-icons">
+        <i class="fas fa-print" title="Imprimer"></i>
+        <i class="fas fa-plus" title="Ajouter"></i>
+      </div>
+    </div>
+    <!-- Search bar -->
+    <div class="search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Rechercher un médicament" />
+    </div>
+    <!-- Filter buttons -->
+    <div class="filter-row">
+      <button class="filter-btn selected" id="btnMed">
+        <img src="https://img.icons8.com/color/32/pill.png" alt="Pill" style="width:22px;height:22px;vertical-align:middle;" />
+        Médicaments
+      </button>
+      <button class="filter-btn" id="btnConsult">
+        <i class="fas fa-stethoscope"></i>
+        Consultation
+      </button>
+    </div>
+    <!-- Banner/Annonce -->
+    <div class="banner-section">
+      <img src="annonce.jpg.jpg" alt="Annonce pharmacie" class="banner-img" />
+      <button class="banner-btn" id="btnAnnonce">Annonce</button>
+    </div>
+    <div class="pagination">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+    <!-- Produit récent -->
+    <div class="section-title">Produits récents</div>
+    <div class="product-list">
+      <div class="product-item">
+        <div class="product-imgs">
+          <img src="doliprane-1000mg-effeverscent-bt-8.jpg" alt="Produit 1" />
+        </div>
+        <div class="product-info">
+          <div class="product-name">Paracétamol 500mg</div>
+          <div class="badges">
+            <div class="badge">Médicament</div>
+            <div class="badge">En Stock</div>
+          </div>
+          <div class="product-date">Ajouté le 15/05/2025</div>
+          <div class="prices-row">
+            <div class="price-current">12,50 MAD</div>
+            <div class="price-old">15,00 MAD</div>
+            <div class="price-off">-17%</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-item">
+        <div class="product-imgs">
+          <img src="ashcroft-pharmacy-ibuprofen-400mg-tablets-1740783905Ibuprofen-400mg-Tablets.png" alt="Produit 2" />
+        </div>
+        <div class="product-info">
+          <div class="product-name">Ibuprofène 400mg</div>
+          <div class="badges">
+            <div class="badge">Médicament</div>
+            <div class="badge">En Stock</div>
+          </div>
+          <div class="product-date">Ajouté le 14/05/2025</div>
+          <div class="prices-row">
+            <div class="price-current">18,00 MAD</div>
+            <div class="price-old">22,00 MAD</div>
+            <div class="price-off">-18%</div>
+          </div>
+        </div>
+      </div>
+      <div class="product-item">
+        <div class="product-imgs">
+          <img src="Vita-c-1000-vitamine-C.jpg" alt="Produit 3" />
+        </div>
+        <div class="product-info">
+          <div class="product-name">Vitamine C 1000mg</div>
+          <div class="badges">
+            <div class="badge">Complément</div>
+            <div class="badge">Disponible</div>
+          </div>
+          <div class="product-date">Ajouté le 12/05/2025</div>
+          <div class="prices-row">
+            <div class="price-current">30,00 MAD</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Nouvelle barre du bas en emoji -->
+  <div class="bottom-nav">
+    <button class="nav-btn active" title="Accueil" id="btnHome">🏠<span class="nav-label">Home</span></button>
+    <button class="nav-btn" title="Favoris" id="btnFavoris">⭐<span class="nav-label">Favoris</span></button>
+    <button class="nav-btn" id="btnScanner" title="Scanner">📷<span class="nav-label">Scanner</span></button>
+    <button class="nav-btn" title="Profil" id="btnProfil">👤<span class="nav-label">Profil</span></button>
+  </div>
+  <!-- Input caché pour la caméra -->
+  <input type="file" accept="image/*" capture="environment" id="cameraInput" style="display:none">
+  <script>
+    // Redirection Consultation
+    document.getElementById('btnConsult').addEventListener('click', function() {
+      window.location.href = 'conseilindex.html';
+    });
+
+    // Redirection Médicaments
+    document.getElementById('btnMed').addEventListener('click', function() {
+      window.location.href = 'medicamentclientindex.html';
+    });
+
+    // Favoris redirige vers favorisindex.html
+    document.getElementById('btnFavoris').addEventListener('click', function() {
+      window.location.href = 'favorisindex.html';
+    });
+
+    // Profil redirige vers profilclientindex.html
+    document.getElementById('btnProfil').addEventListener('click', function() {
+      window.location.href = 'profilclientindex.html';
+    });
+
+    // Scanner ouvre la caméra
+    document.getElementById('btnScanner').addEventListener('click', function() {
+      document.getElementById('cameraInput').click();
+    });
+
+    document.getElementById('cameraInput').addEventListener('change', function(event) {
+      if(event.target.files && event.target.files[0]) {
+        alert("Photo prise !");
+        // Ici tu peux afficher la photo ou l'envoyer à un serveur
+      }
+    });
+
+    // Redirection Annonce vers le site officiel de la santé au Gabon
+    document.getElementById('btnAnnonce').addEventListener('click', function() {
+      window.location.href = 'https://www.sante.gouv.ga/';
+    });
+  </script>
+</body>
+</html>

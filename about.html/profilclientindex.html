@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=375, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Paramètres</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 375px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-bottom: 70px;
+    }
+    /* Header */
+    .header {
+      width: 100%;
+      background: #a5c8d6;
+      border-bottom-left-radius: 36px;
+      border-bottom-right-radius: 36px;
+      position: relative;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+    .back-arrow {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      font-size: 1.6em;
+      color: #222;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .header-icon-bg {
+      width: 180px;
+      height: 180px;
+      background: #b7d4e2;
+      border-radius: 30px;
+      position: absolute;
+      left: 50%;
+      top: 40px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .header-icon-bg .fa-gear {
+      font-size: 110px;
+      color: #111;
+    }
+    /* Grille des boutons */
+    .grid {
+      margin: 32px 0 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 22px 18px;
+      justify-items: center;
+      padding: 0 24px;
+    }
+    .grid-btn {
+      width: 140px;
+      height: 80px;
+      background: #fff;
+      border: 1.7px solid #b7e3f6;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.09em;
+      color: #111;
+      font-weight: 500;
+      cursor: pointer;
+      transition: box-shadow 0.17s, border 0.18s;
+      box-shadow: 0 2px 8px rgba(79,195,247,0.04);
+      margin-bottom: 0;
+      outline: none;
+      user-select: none;
+    }
+    .grid-btn:active {
+      border-color: #4fc3f7;
+      box-shadow: 0 2px 12px rgba(79,195,247,0.11);
+    }
+    .grid-btn i, .grid-btn svg {
+      font-size: 1.8em;
+      margin-bottom: 7px;
+      color: #111;
+    }
+    /* Pour le bouton sécurité (dernier, centré) */
+    .grid-btn.securite {
+      grid-column: span 2;
+      width: 60%;
+      margin: 0 auto;
+      justify-self: center;
+    }
+    /* Barre navigation bas */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      max-width: 375px;
+      background: #fff;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.07);
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 58px;
+      z-index: 1000;
+      user-select: none;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #bbb;
+      font-size: 1.7em;
+      padding: 5px 0 0 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+      transition: color 0.18s;
+      position: relative;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .nav-btn.active {
+      color: #4fc3f7;
+    }
+    .nav-label {
+      display: block;
+      font-size: 0.55em;
+      margin-top: 2px;
+      letter-spacing: 0.01em;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    @media (max-width: 600px) {
+      .container, .bottom-nav {
+        width: 100vw;
+        max-width: 100vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <button class="back-arrow" id="backBtn"><i class="fas fa-arrow-left"></i></button>
+      <div class="header-icon-bg">
+        <i class="fas fa-gear"></i>
+      </div>
+    </div>
+    <!-- Grille des boutons -->
+    <div class="grid">
+      <button class="grid-btn" id="btnProfil">
+        <i class="fa-regular fa-user"></i>
+        Profil
+      </button>
+      <button class="grid-btn" id="btnPanier">
+        <i class="fa-solid fa-cart-shopping"></i>
+        Panier
+      </button>
+      <button class="grid-btn" id="btnOrdonnance">
+        <i class="fa-regular fa-file"></i>
+        Ordonnance
+      </button>
+      <button class="grid-btn" id="btnLivraison">
+        <i class="fa-solid fa-truck"></i>
+        Livraison
+      </button>
+      <button class="grid-btn securite" id="btnSecurite">
+        <i class="fa-solid fa-lock"></i>
+        Securite
+      </button>
+    </div>
+  </div>
+  <!-- Barre de navigation bas -->
+  <div class="bottom-nav">
+    <button class="nav-btn active" title="Accueil" id="btnHome">🏠<span class="nav-label">Home</span></button>
+    <button class="nav-btn" title="Favoris" id="btnFavoris">⭐<span class="nav-label">Favoris</span></button>
+    <button class="nav-btn" id="btnScanner" title="Scanner">📷<span class="nav-label">Scanner</span></button>
+    <button class="nav-btn" title="Profil" id="btnProfilNav">👤<span class="nav-label">Profil</span></button>
+  </div>
+
+  <!-- Input caché pour la caméra -->
+  <input type="file" accept="image/*" capture="environment" id="cameraInput" style="display:none" />
+
+  <script>
+    // Bouton retour
+    document.getElementById('backBtn').addEventListener('click', () => {
+      window.history.back();
+    });
+
+    // Actions pour les boutons grille (personnalise les redirections)
+    document.getElementById('btnProfil').addEventListener('click', () => {
+      alert('Accès au profil');
+      // window.location.href = 'profil.html';
+    });
+    document.getElementById('btnPanier').addEventListener('click', () => {
+      alert('Accès au panier');
+      // window.location.href = 'panier.html';
+    });
+    document.getElementById('btnOrdonnance').addEventListener('click', () => {
+      alert('Accès à l\'ordonnance');
+      // window.location.href = 'ordonnance.html';
+    });
+    document.getElementById('btnLivraison').addEventListener('click', () => {
+      alert('Accès à la livraison');
+      // window.location.href = 'livraison.html';
+    });
+    document.getElementById('btnSecurite').addEventListener('click', () => {
+      alert('Accès à la sécurité');
+      // window.location.href = 'securite.html';
+    });
+
+    // Navigation barre du bas
+    document.getElementById('btnHome').addEventListener('click', () => {
+      window.location.href = 'menuclientindex.html';
+    });
+    document.getElementById('btnFavoris').addEventListener('click', () => {
+      window.location.href = 'favorisidex.html';
+    });
+    document.getElementById('btnScanner').addEventListener('click', () => {
+      document.getElementById('cameraInput').click();
+    });
+    document.getElementById('cameraInput').addEventListener('change', (event) => {
+      if(event.target.files && event.target.files[0]) {
+        alert('Photo prise !');
+      }
+    });
+    document.getElementById('btnProfilNav').addEventListener('click', () => {
+      window.location.href = 'profilclientidex.html';
+    });
+  </script>
+</body>
+</html>

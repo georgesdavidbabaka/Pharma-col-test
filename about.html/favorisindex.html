@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=375, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Favoris Pharma'Col</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 375px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-bottom: 80px;
+    }
+    /* Header graphique */
+    .header-graphic {
+      width: 100%;
+      height: 150px;
+      background: #98c2d6;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header-graphic svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+    }
+    /* Flèche retour */
+    .back-arrow {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      font-size: 1.6em;
+      color: #222;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+    }
+    /* Favoris */
+    .favoris-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -28px;
+      margin-bottom: 16px;
+      z-index: 3;
+      position: relative;
+    }
+    .favoris-btn {
+      display: flex;
+      align-items: center;
+      border: 2px solid #b3e5fc;
+      border-radius: 24px;
+      background: #fff;
+      color: #4fc3f7;
+      font-weight: 500;
+      font-size: 1.1em;
+      padding: 6px 22px 6px 18px;
+      gap: 10px;
+      cursor: pointer;
+      transition: border 0.2s, color 0.2s;
+      outline: none;
+      box-shadow: 0 2px 8px rgba(79,195,247,0.06);
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .favoris-btn .fa-heart {
+      color: #b3e5fc;
+      font-size: 1.2em;
+      margin-left: 5px;
+    }
+    /* Liste produits */
+    .products-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding: 0 0 0 0;
+      margin: 0 0 0 0;
+    }
+    .product-item {
+      display: flex;
+      align-items: center;
+      background: #f2f2f2;
+      border-radius: 22px;
+      margin: 0 16px;
+      padding: 7px 12px 7px 7px;
+      gap: 12px;
+      min-height: 60px;
+      box-shadow: 0 2px 10px rgba(44, 62, 80, 0.04);
+    }
+    .product-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+    }
+    .product-name {
+      flex: 1;
+      font-size: 1.13em;
+      color: #222;
+      font-weight: 500;
+      margin-left: 5px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .add-btn {
+      background: #4fc3f7;
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      padding: 8px 22px 8px 18px;
+      font-size: 1.05em;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(79, 195, 247, 0.10);
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .add-btn i {
+      font-size: 1.1em;
+      margin-left: 3px;
+    }
+    .add-btn:active {
+      background: #0288d1;
+    }
+    /* Barre navigation bas */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      max-width: 375px;
+      background: #fff;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.07);
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 58px;
+      z-index: 1000;
+      user-select: none;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #bbb;
+      font-size: 1.7em;
+      padding: 5px 0 0 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+      transition: color 0.18s;
+      position: relative;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .nav-btn.active {
+      color: #4fc3f7;
+    }
+    .nav-label {
+      display: block;
+      font-size: 0.55em;
+      margin-top: 2px;
+      letter-spacing: 0.01em;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    @media (max-width: 600px) {
+      .container, .bottom-nav {
+        width: 100vw;
+        max-width: 100vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header graphique avec SVG pour la montagne -->
+    <div class="header-graphic">
+      <button class="back-arrow" id="backBtn"><i class="fas fa-arrow-left"></i></button>
+      <svg viewBox="0 0 375 70" preserveAspectRatio="none">
+        <polygon points="0,50 70,30 150,55 230,30 320,60 375,40 375,70 0,70" fill="#e0e7ea"/>
+      </svg>
+    </div>
+    <!-- Favoris -->
+    <div class="favoris-container">
+      <button class="favoris-btn">
+        favoris <i class="fa-regular fa-heart"></i>
+      </button>
+    </div>
+    <!-- Liste produits -->
+    <div class="products-list">
+      <div class="product-item">
+        <img class="product-img" src="d-cure-25-000-ui-12-ampoules.jpg" alt="D-cure" />
+        <div class="product-name">D-cure</div>
+        <button class="add-btn">Ajouter <i class="fas fa-shopping-cart"></i></button>
+      </div>
+      <div class="product-item">
+        <img class="product-img" src="images (6).jpeg" alt="Imodium" />
+        <div class="product-name">Imodium</div>
+        <button class="add-btn">Ajouter <i class="fas fa-shopping-cart"></i></button>
+      </div>
+      <div class="product-item">
+        <img class="product-img" src="inline-123326.jpg.jpg" alt="Oropolis" />
+        <div class="product-name">Oropolis</div>
+        <button class="add-btn">Ajouter <i class="fas fa-shopping-cart"></i></button>
+      </div>
+      <div class="product-item">
+        <img class="product-img" src="new_micralax-fr-fr.jpeg" alt="Microlax" />
+        <div class="product-name">Microlax</div>
+        <button class="add-btn">Ajouter <i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+  <!-- Barre de navigation bas -->
+  <div class="bottom-nav">
+    <button class="nav-btn active" title="Accueil" id="btnHome">🏠<span class="nav-label">Home</span></button>
+    <button class="nav-btn" title="Favoris" id="btnFavoris">⭐<span class="nav-label">Favoris</span></button>
+    <button class="nav-btn" id="btnScanner" title="Scanner">📷<span class="nav-label">Scanner</span></button>
+    <button class="nav-btn" title="Profil" id="btnProfil">👤<span class="nav-label">Profil</span></button>
+  </div>
+  <!-- Input caché pour la caméra -->
+  <input type="file" accept="image/*" capture="environment" id="cameraInput" style="display:none" />
+
+  <script>
+    // Bouton retour
+    document.getElementById('backBtn').addEventListener('click', () => {
+      window.history.back();
+    });
+
+    // Animation bouton "Ajouter"
+    document.querySelectorAll('.add-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        btn.innerHTML = 'Ajouté <i class="fas fa-check"></i>';
+        btn.style.background = '#0288d1';
+        setTimeout(() => {
+          btn.innerHTML = 'Ajouter <i class="fas fa-shopping-cart"></i>';
+          btn.style.background = '#4fc3f7';
+        }, 1200);
+      });
+    });
+
+    // Navigation barre du bas
+    document.getElementById('btnHome').addEventListener('click', () => {
+      window.location.href = 'menuclientindex.html';
+    });
+    document.getElementById('btnScanner').addEventListener('click', () => {
+      document.getElementById('cameraInput').click();
+    });
+    document.getElementById('btnProfil').addEventListener('click', () => {
+      window.location.href = 'profilclientindex.html';
+    });
+
+    // Gestion de la photo prise (optionnel)
+    document.getElementById('cameraInput').addEventListener('change', (event) => {
+      if(event.target.files && event.target.files[0]) {
+        alert('Photo prise !');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pharma'Col</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #b3e5fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    .container {
+      max-width: 375px;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(to right, #b3e5fc 0%, #ffffff 50%, #b3e5fc 100%);
+      position: relative;
+      box-sizing: border-box;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .info-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #e0f7fa;
+      color: #007aff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      user-select: none;
+      z-index: 10;
+    }
+
+    .image-section {
+      flex-grow: 1;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .image-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+    }
+
+    .welcome-text {
+      font-size: 20px;
+      color: #000;
+      line-height: 1.5;
+      user-select: none;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .start-button {
+      background: linear-gradient(to right, #4fc3f7, #0288d1);
+      border: none;
+      color: white;
+      padding: 18px 50px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      user-select: none;
+      box-shadow: 0 5px 15px rgba(2, 136, 209, 0.4);
+      align-self: center;
+      margin-bottom: 20px;
+    }
+
+    .start-button:hover {
+      background: linear-gradient(to right, #0288d1, #0277bd);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="info-icon" title="Informations">i</div>
+
+    <div class="image-section">
+      <img
+        src="logo.jpg.jpg"
+        alt="Photo pharmacie"
+      />
+    </div>
+
+    <div class="welcome-text">
+      <p>Bienvenue dans<br />pharma’col, la<br />pharmacie dans votre col</p>
+    </div>
+
+    <button class="start-button" onclick="startApp()">continuer</button>
+  </div>
+
+  <script>
+    function startApp() {
+      window.location.href = "accueilindex.html";
+    }
+
+    document.querySelector('.info-icon').addEventListener('click', () => {
+      window.location.href = 'informationindex.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=375, initial-scale=1" />
+  <title>Pharma Mobile UI</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #fff;
+      color: #222;
+      width: 100vw;
+      min-width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    .container {
+      width: 375px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding-bottom: 80px;
+      background: #fff;
+      box-sizing: border-box;
+      position: relative;
+    }
+    /* Top bar */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 14px 0 14px;
+    }
+    .back-btn {
+      font-size: 1.5em;
+      color: #222;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .category-btn {
+      display: flex;
+      align-items: center;
+      border: 2px solid #1ea7db;
+      border-radius: 22px;
+      padding: 3px 18px 3px 7px;
+      background: #fff;
+      font-weight: 700;
+      font-size: 1.1em;
+      color: #1ea7db;
+      gap: 7px;
+      box-shadow: 0 2px 8px rgba(30, 167, 219, 0.04);
+    }
+    .category-btn img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+      box-shadow: 0 1px 3px rgba(30,167,219,0.10);
+    }
+    .cart-btn {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.6em;
+      color: #222;
+    }
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #1ea7db;
+      color: #fff;
+      font-size: 0.85em;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #fff;
+    }
+    /* Search bar */
+    .search-bar {
+      margin: 18px 14px 0 14px;
+      display: flex;
+      align-items: center;
+      background: #f5f5f5;
+      border-radius: 22px;
+      padding: 0 16px;
+      height: 44px;
+      box-shadow: 0 2px 8px rgba(30, 167, 219, 0.03);
+    }
+    .search-bar i {
+      color: #888;
+      font-size: 1.2em;
+      margin-right: 10px;
+    }
+    .search-bar input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 1.05em;
+      flex: 1;
+      color: #222;
+      font-family: inherit;
+    }
+    /* Filters row */
+    .filters-row {
+      margin: 16px 0 0 0;
+      padding: 0 10px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filters-row::-webkit-scrollbar {
+      display: none;
+    }
+    .filter-chip {
+      display: flex;
+      align-items: center;
+      border: 2px solid #e0e0e0;
+      border-radius: 22px;
+      background: #fff;
+      color: #1ea7db;
+      font-weight: 600;
+      font-size: 1em;
+      padding: 6px 18px;
+      cursor: pointer;
+      gap: 7px;
+      transition: border 0.15s, color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .filter-chip.selected {
+      background: #eaf8fc;
+      border-color: #1ea7db;
+      color: #1ea7db;
+    }
+    .filter-chip img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    /* Product card */
+    .product-card {
+      display: flex;
+      background: #eaf8fc;
+      border-radius: 18px;
+      margin: 18px 14px 0 14px;
+      box-shadow: 0 2px 10px rgba(30, 167, 219, 0.05);
+      overflow: hidden;
+    }
+    .product-img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 12px 0 0 12px;
+      margin: 16px 0 16px 16px;
+      background: #fff;
+      flex-shrink: 0;
+    }
+    .product-info {
+      flex: 1;
+      padding: 16px 16px 16px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-title {
+      font-size: 1.13em;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #222;
+    }
+    .product-desc {
+      font-size: 0.98em;
+      color: #222;
+      margin-bottom: 7px;
+    }
+    .product-usage {
+      font-size: 0.97em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .add-btn {
+      background: #1ea7db;
+      color: #fff;
+      border: none;
+      border-radius: 22px;
+      padding: 8px 28px 8px 18px;
+      font-size: 1.08em;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(30, 167, 219, 0.10);
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+    .add-btn i {
+      font-size: 1.1em;
+    }
+    .add-btn:active {
+      background: #1976d2;
+    }
+    /* Nouvelle barre du bas en emoji */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 375px;
+      min-width: 375px;
+      max-width: 375px;
+      background: #fff;
+      box-shadow: 0 -2px 16px rgba(0,0,0,0.06);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 58px;
+      z-index: 1000;
+      user-select: none;
+    }
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 1.7em;
+      padding: 5px 0 0 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+      transition: color 0.18s;
+      position: relative;
+    }
+    .nav-btn.active {
+      color: #1ea7db;
+    }
+    .nav-label {
+      display: block;
+      font-size: 0.55em;
+      margin-top: 2px;
+      letter-spacing: 0.01em;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    @media (max-width: 600px) {
+      .container, .bottom-nav {
+        width: 100vw;
+        min-width: 100vw;
+        max-width: 100vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Barre supérieure -->
+    <div class="top-bar">
+      <button class="back-btn" onclick="window.history.back()"><i class="fas fa-arrow-left"></i></button>
+      <button class="category-btn">
+        <img src="https://img.icons8.com/color/48/pill.png" alt="Médicaments" />
+        Médicaments
+      </button>
+      <button class="cart-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge" id="cartCount">6</span>
+      </button>
+    </div>
+    <!-- Barre de recherche -->
+    <div class="search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Rechercher un médicament" />
+    </div>
+    <!-- Filtres horizontaux -->
+    <div class="filters-row">
+      <div class="filter-chip selected">
+        <img src="https://img.icons8.com/color/48/doliprane.png" alt="Effervescents" />
+        Effervescants
+      </div>
+      <div class="filter-chip">
+        <img src="https://img.icons8.com/color/48/syringe.png" alt="Injection" />
+        Injection
+      </div>
+      <div class="filter-chip">
+        <img src="https://img.icons8.com/color/48/prescription.png" alt="Ordonnance" />
+        Ordonnance
+      </div>
+    </div>
+    <!-- Carte médicament 1 -->
+    <div class="product-card">
+      <img class="product-img" src="doliprane-1000mg-effeverscent-bt-8.jpg" alt="Doliprane 1000 mg" />
+      <div class="product-info">
+        <div>
+          <div class="product-title">Doliprane 1000 mg</div>
+          <div class="product-desc">
+            <strong>Description :</strong><br />
+            Médicament à base de paracétamol utilisé pour soulager la douleur (céphalées, douleurs dentaires, courbatures) et faire baisser la fièvre.
+          </div>
+          <div class="product-usage">
+            <strong>Prise :</strong> Dissoudre un comprimé dans un grand verre d’eau, à prendre toutes les 4 à 6 heures si besoin, sans dépasser 3 g par jour (soit 3 comprimés).
+          </div>
+        </div>
+        <button class="add-btn">
+          Ajouter <i class="fas fa-cart-plus"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Carte médicament 2 -->
+    <div class="product-card">
+      <img class="product-img" src="images (5).jpeg" alt="Efferalgan Vitamine C" />
+      <div class="product-info">
+        <div>
+          <div class="product-title">Efferalgan Vitamine C 500 mg / 150 mg</div>
+          <div class="product-desc">
+            <strong>Description :</strong><br />
+            Association de paracétamol et de vitamine C pour traiter les états grippaux ou les coups de fatigue accompagnés de fièvre.
+          </div>
+          <div class="product-usage">
+            <strong>Prise :</strong> 1 comprimé effervescent à dissoudre dans un verre d’eau, à renouveler si nécessaire au bout de 6 heures, sans dépasser 4 prises par jour.
+          </div>
+        </div>
+        <button class="add-btn">
+          Ajouter <i class="fas fa-cart-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Nouvelle barre du bas en emoji -->
+  <div class="bottom-nav">
+    <button class="nav-btn active" title="Accueil" id="btnHome">🏠<span class="nav-label">Home</span></button>
+    <button class="nav-btn" title="Favoris" id="btnFavoris">⭐<span class="nav-label">Favoris</span></button>
+    <button class="nav-btn" id="btnScanner" title="Scanner">📷<span class="nav-label">Scanner</span></button>
+    <button class="nav-btn" title="Profil" id="btnProfil">👤<span class="nav-label">Profil</span></button>
+  </div>
+
+  <!-- Input caché pour la caméra -->
+  <input type="file" accept="image/*" capture="environment" id="cameraInput" style="display:none" />
+
+  <script>
+    // Ajout dynamique au panier (exemple)
+    document.querySelectorAll('.add-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        let count = parseInt(document.getElementById('cartCount').textContent, 10);
+        document.getElementById('cartCount').textContent = count + 1;
+        btn.textContent = 'Ajouté !';
+        setTimeout(() => (btn.innerHTML = 'Ajouter <i class="fas fa-cart-plus"></i>'), 1200);
+      });
+    });
+
+    // Sélection filtre (exemple)
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', function () {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+      });
+    });
+
+    // Navigation boutons bas
+    document.getElementById('btnHome').addEventListener('click', () => {
+      window.location.href = 'menuclientindex.html';
+    });
+    document.getElementById('btnFavoris').addEventListener('click', () => {
+      window.location.href = 'favorisidex.html';
+    });
+    document.getElementById('btnProfil').addEventListener('click', () => {
+      window.location.href = 'profilclientindex.html';
+    });
+
+    // Ouvrir appareil photo au clic sur scanner
+    document.getElementById('btnScanner').addEventListener('click', () => {
+      document.getElementById('cameraInput').click();
+    });
+
+    // Gestion de la photo prise
+    document.getElementById('cameraInput').addEventListener('change', (event) => {
+      if(event.target.files && event.target.files[0]) {
+        alert('Photo prise !');
+        // Ici tu peux ajouter le traitement de la photo
+      }
+    });
+  </script>
+</body>
+</html>
